@@ -1,6 +1,8 @@
 {
-"name": "nodechat",
-"version": "0.0.1",
-"description": "o meu chatinho",
-"dependencies": {}
+  "name": "nodechat",
+  "version": "0.0.1",
+  "description": "o meu chatinho",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
 }

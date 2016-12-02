@@ -21,6 +21,22 @@ var path = require('path');
 app.use(express.static(path.resolve(__dirname, 'static')));
 
 
+//integrar sockets
+var socketio = require("socket.io");
+
+var io = socketio.listen(server);
+// connection e uma mensagem por defeito de conexao
+
+io.on('connection', function(socket){
+	console.log('temos um cliente ligado');
+	socket.on("chat",function (mensagem) {
+		console.log(mensagem);
+		io.emit("new",mensagem);
+	});
+});
+
+
+
 // colocar servidor à escuta no porto 3000 (ou o definido pelo sistema)
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
 var addr = server.address();

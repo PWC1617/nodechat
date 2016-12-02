@@ -3,15 +3,45 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="chat.css">
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 </head>
 <body>
 <div id="messenger">
-	<form>
+	<form id="f1">
 		<input type="text" id="inmsg" placeholder ="type message"/>
-		<input type="submit" id ="insend" value="chat">
+		<!--input type="submit" id ="insend" value="chat"-->
 	</form>
 </div>
 <div id = "content"></div>
+<script type="text/javascript">
 
+	var socket = io.connect();
+
+	socket.on("new", function (mensagem) {
+		afixa("-> ", mensagem);
+	});
+
+	function afixa(nick,message) {
+		var div = document.getElementById("content");
+		var newp = document.createElement("p");
+		newp.innerHTML = nick + " : " + message;
+		div.appendChild(newp);
+	}
+
+	function out() {
+		var text = document.getElementById("inmsg").value;
+		//afixa("xxxx",text);
+		document.getElementById("inmsg").value="";
+		socket.emit("chat",text);
+		return false;
+	}
+
+	document.getElementById("f1").onsubmit = out;
+
+	afixa ("ronaldo", "uuuuuuuuhhhh");
+
+
+
+</script>
 </body>
 </html>

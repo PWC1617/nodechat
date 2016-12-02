@@ -15,6 +15,12 @@ app.get('/', function(req, res){
 res.send('<h1>Ola PWC</h1>');
 });
 
+// usar o módulo path (utilidades de caminhos)
+var path = require('path');
+// usar o servidor de static do express
+app.use(express.static(path.resolve(__dirname, 'static')));
+
+
 // colocar servidor à escuta no porto 3000 (ou o definido pelo sistema)
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
 var addr = server.address();
